@@ -29,7 +29,9 @@ public class StoplightFactory implements AppFactory {
         return null;
     }
 
-    public String getTitle() { return "Stop Light Simulator"; }
+    public String getTitle() {
+        return "Stop Light Simulator";
+    }
 
     public String getHelp() {
         String s = "click Change to cycle through colors";
