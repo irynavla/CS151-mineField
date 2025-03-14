@@ -4,7 +4,7 @@ import mvc.AppFactory;
 import mvc.Model;
 import mvc.View;
 
-public class Factory implements AppFactory {
+public class MineFieldFactory implements AppFactory {
     @Override
     public Model createModel() {
         return null;
