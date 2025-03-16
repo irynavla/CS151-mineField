@@ -1,24 +1,27 @@
 package mvc;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class AppPanel extends JPanel {
-    protected ControlPanel controlPanel;
+public class AppPanel extends JPanel implements ActionListener {
+    protected JPanel controlPanel;
     protected View view;
 
-    public AppPanel(View view) {
-        this.view = view;
-        this.controlPanel = new ControlPanel();
+    public AppPanel() {
+        controlPanel = new JPanel();
         setLayout(new BorderLayout());
-        add(view, BorderLayout.CENTER);
+//        add(view, BorderLayout.CENTER);
         add(controlPanel, BorderLayout.SOUTH);
     }
 
-    // Nested class inside AppPanel
-    public class ControlPanel extends JPanel {
-        public ControlPanel() {
-            JButton button = new JButton("Click Me");
-            add(button);
-        }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    public static void main(String[] args){
+        AppPanel app = new AppPanel();
     }
 }
