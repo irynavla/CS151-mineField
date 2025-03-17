@@ -34,6 +34,11 @@ public class StoplightFactory implements AppFactory {
         return null;
     }
 
+    @Override
+    public View createView(Model model) {
+        return null;
+    }
+
     public String getTitle() {
         return "Stop Light Simulator";
     }

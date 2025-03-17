@@ -1,6 +1,7 @@
 package mineField;
 
 import mvc.AppFactory;
+import mvc.Command;
 import mvc.Model;
 import mvc.View;
 
@@ -26,7 +27,17 @@ public class MineFieldFactory implements AppFactory {
     }
 
     @Override
+    public Command makeEditCommand(String name) {
+        return null;
+    }
+
+    @Override
     public Model makeModel() {
+        return null;
+    }
+
+    @Override
+    public View makeView(Model model) {
         return null;
     }
 
