@@ -12,7 +12,10 @@ public class MineFieldModel extends Model {
 	public MineFieldModel(int rows, int cols) {
 		this.rows = rows;
 		this.cols = cols;
+		this.grid = new Cell[rows][cols];
+		initializeGrid();
 	}
+
 
 	private class Cell {
         boolean isMined;
@@ -51,8 +54,16 @@ public class MineFieldModel extends Model {
 
 	public int getNeighboringMines(int row, int col) {
 		int total = 0;
-		for (Heading h: Heading.values()) {
-			if (grid[row+h.getDx()][col+h.getDy()].isMined == true) total++;
+		for (Heading h : Heading.values()) {
+			int newRow = row + h.getDx();
+			int newCol = col + h.getDy();
+
+			// Bounds check to avoid ArrayIndexOutOfBoundsException
+			if (newRow >= 0 && newRow < grid.length && newCol >= 0 && newCol < grid[0].length) {
+				if (grid[newRow][newCol].isMined) {
+					total++;
+				}
+			}
 		}
 		return total;
 	}

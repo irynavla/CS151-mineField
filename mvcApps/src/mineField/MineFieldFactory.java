@@ -6,29 +6,10 @@ import mvc.Model;
 import mvc.View;
 
 public class MineFieldFactory implements AppFactory {
+
     @Override
     public Model createModel() {
-        return null;
-    }
-
-    @Override
-    public View createView(Model model) {
-        return null;
-    }
-
-    @Override
-    public String getTitle() {
-        return "Mine Field";
-    }
-
-    @Override
-    public String[] getEditCommands() {
-        return new String[0];
-    }
-
-    @Override
-    public Command makeEditCommand(String name) {
-        return null;
+        return new MineFieldModel(10, 10); // Example grid size
     }
 
     @Override
@@ -42,12 +23,39 @@ public class MineFieldFactory implements AppFactory {
     }
 
     @Override
+    public View createView(Model model) {
+        return new MineFieldView((MineFieldModel) model);
+    }
+
+    @Override
+    public String getTitle() {
+        return "Mine Field";
+    }
+
+    @Override
+    public String[] getEditCommands() {
+        return new String[] {"Move North", "Move East", "Move South", "Move West"};
+    }
+
+    @Override
+    public Command makeEditCommand(String name) {
+        MineFieldModel model = (MineFieldModel) createModel();
+        switch (name) {
+            case "Move North": return new MineFieldCommand(model, Heading.N);
+            case "Move East": return new MineFieldCommand(model, Heading.E);
+            case "Move South": return new MineFieldCommand(model, Heading.S);
+            case "Move West": return new MineFieldCommand(model, Heading.W);
+            default: return null;
+        }
+    }
+
+    @Override
     public String about() {
-        return null;
+        return "Mine Field Game v1.0";
     }
 
     @Override
     public String getHelp() {
-        return null;
+        return "Move using directional commands. Avoid mines!";
     }
 }
