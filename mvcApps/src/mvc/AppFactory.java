@@ -6,6 +6,7 @@ public interface AppFactory {
     String getTitle();
     String getHelp();
     String about();
-    String getEditCommands();
+    String[] getEditCommands();
     Command makeEditCommand(String name);
+    Model createModel();
 }

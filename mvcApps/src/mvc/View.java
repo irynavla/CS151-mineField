@@ -20,7 +20,4 @@ public class View extends JPanel implements Subscriber {
     public void update() {
         repaint();
     }
-
-    public void setModel(Model model) {
-    }
 }

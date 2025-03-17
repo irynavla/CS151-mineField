@@ -8,12 +8,12 @@ public class MineFieldModel extends Model {
 	private static int percentMined = 5;
 	private int px, py;
 	private boolean gameOver;
-	
+
 	public MineFieldModel(int rows, int cols) {
 		this.rows = rows;
 		this.cols = cols;
 	}
-  
+
 	private class Cell {
         boolean isMined;
         boolean isVisited;
@@ -25,7 +25,7 @@ public class MineFieldModel extends Model {
             neighborMines = 0;
         }
     }
-  
+
 	public void initializeGrid() {
 		Random rand = new Random();
         for (int r = 0; r < rows; r++) {
@@ -46,9 +46,9 @@ public class MineFieldModel extends Model {
             }
         }
 		changed();
-		
+
 	}
-	
+
 	public int getNeighboringMines(int row, int col) {
 		int total = 0;
 		for (Heading h: Heading.values()) {
@@ -56,26 +56,26 @@ public class MineFieldModel extends Model {
 		}
 		return total;
 	}
-	
+
 	public boolean isMine(int row, int col) {
 		return this.grid[row][col].isMined;
 	}
-	
+
 	public void move(Heading h) throws GameOverException, IllegalMoveException, WinException, LoseException {
 		if (gameOver) {
             throw new GameOverException();
         }
-		
+
 		int newX = this.px + h.getDx();
 		int newY = this.py + h.getDy();
-		
+
 		if (newX < 0 || newX >= this.rows || newY < 0 || newY >= this.cols) {
 			throw new IllegalMoveException();
 		}
-		
+
 		this.px = newX;
 		this.py = newY;
-		
+
 		if (this.px == this.rows - 1 && this.py == this.cols - 1) {
 			changed();
 			throw new WinException();
@@ -84,11 +84,11 @@ public class MineFieldModel extends Model {
 			changed();
 			throw new LoseException();
 		}
-		
+
 		this.grid[this.px][this.py].isVisited = true;
 		changed();
 	}
-	
+
 	public int getPx() {
 		return this.px;
 	}
@@ -101,7 +101,7 @@ public class MineFieldModel extends Model {
 	public int getCols() {
 		return this.cols;
 	}
-	
+
 	public void resetGame() {
 		initializeGrid();
 	}

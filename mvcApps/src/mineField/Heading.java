@@ -9,7 +9,7 @@ public enum Heading {
     SW(-1, 1),
     W(-1, 0),
     NW(-1, -1);
-	
+
 	private final int dx;
     private final int dy;
 
@@ -25,5 +25,5 @@ public enum Heading {
     public int getDy() {
         return dy;
     }
-	
+
 }
