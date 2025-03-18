@@ -1,14 +1,12 @@
 package mvc;
 
-import javax.swing.*;
+import java.awt.event.*;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 import java.util.Random;
+import javax.swing.*;
 
 public class Utilities {
-    public static void log(String message) {
-        System.out.println("[LOG]: " + message);
-    }
 
     // asks user a yes/no question
     public static boolean confirm(String query) {
@@ -54,10 +52,12 @@ public class Utilities {
     }
 
     // asks user to save changes
-   /* public static void saveChanges(Model model) {
-        if (model.getUnsavedChanges() && Utilities.confirm("current model has unsaved changes, continue?"))
+    public static void saveChanges(Model model) {
+        if (model.getUnsavedChanges() &&
+                !Utilities.confirm("current model has unsaved changes, continue?")) {
             Utilities.save(model, false);
-    }*/
+        }
+    }
 
     // asks user for a file name
     public static String getFileName(String fName, Boolean open) {
@@ -82,7 +82,7 @@ public class Utilities {
     }
 
     // save model
-/*    public static void save(Model model, Boolean saveAs) {
+    public static void save(Model model, Boolean saveAs) {
         String fName = model.getFileName();
         if (fName == null || saveAs) {
             fName = getFileName(fName, false);
@@ -112,7 +112,7 @@ public class Utilities {
             Utilities.error(err);
         }
         return newModel;
-    }*/
+    }
 
     // simple menu maker
     public static JMenu makeMenu(String name, String[] items, ActionListener handler) {
@@ -128,6 +128,9 @@ public class Utilities {
     // random number generator
     public static Random rng = new Random(System.currentTimeMillis());
 
+    public static void log(String msg) {
+        System.out.println(msg); // for now
+    }
 
     private static int nextID = 100;
     public static int getID() {

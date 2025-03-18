@@ -1,11 +1,20 @@
 package mvc;
+
 import javax.swing.*;
+import java.awt.event.WindowEvent;
 
 public class SafeFrame extends JFrame {
-    public SafeFrame(String title) {
-        super(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 400);
-        setVisible(true);
+
+    protected void processWindowEvent(WindowEvent ev) {
+        super.processWindowEvent(ev);
+        if(ev.getID() == WindowEvent.WINDOW_CLOSING) {
+            if (Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
+                System.exit(0);
+            }
+        }
+    }
+
+    public SafeFrame() {
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 }

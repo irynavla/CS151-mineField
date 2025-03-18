@@ -1,7 +1,8 @@
 package mvc;
-import javax.swing.JPanel;
 
-public class View extends JPanel implements Subscriber {
+import javax.swing.*;
+
+public abstract class View extends JPanel implements Subscriber {
     protected Model model;
 
     public View(Model model) {
