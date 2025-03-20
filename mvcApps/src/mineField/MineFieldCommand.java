@@ -1,9 +1,11 @@
 package mineField;
 import mvc.Command;
+import mvc.Model;
+
 public class MineFieldCommand extends Command{
     private Heading heading;
 
-    public MineFieldCommand(MineFieldModel model, Heading heading) {
+    public MineFieldCommand(Model model, Heading heading) {
         super(model);
         this.heading = heading;
     }
