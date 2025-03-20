@@ -53,27 +53,38 @@ public class MineFieldView extends View {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(new Font("Arial", Font.BOLD, 10));
+
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
-//                JButton cell = gridCells[r][c];
+                // Default cell background
+                g.setColor(Color.GRAY);
+                g.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+
+                // Draw the cell text
+                g.setColor(Color.BLACK);
                 if (model.isVisited(r, c)) {
-//                    cell.setBackground(Color.LIGHT_GRAY);
                     int neighborMines = model.getNeighborMines(r, c);
-                    g.setColor(Color.LIGHT_GRAY);
-                    g.fillRect(r*cellSize,c*cellSize,cellSize,cellSize);
-                    g.setColor(Color.WHITE);
-                    g.drawString(Integer.toString(neighborMines),r*cellSize+(cellSize/2),c*cellSize+(cellSize/2));
+                    g.drawString(Integer.toString(neighborMines), c * cellSize + (cellSize / 2), r * cellSize + (cellSize / 2));
                 } else {
-                    g.setColor(Color.DARK_GRAY);
-                    g.fillRect(r*cellSize,c*cellSize,cellSize,cellSize);
-                    g.setColor(Color.WHITE);
-                    g.drawString("?",r*cellSize+(cellSize/2),c*cellSize+(cellSize/2));
-//                    cell.setBackground(Color.DARK_GRAY);
-//                    cell.setText("?");
+                    g.drawString("?", c * cellSize + (cellSize / 2), r * cellSize + (cellSize / 2));
                 }
+
+                // Set border color
+                if (model.isGoal(r, c)) {
+                    g.setColor(Color.GREEN); // Goal cell border
+                } else if (model.isVisited(r, c)) {
+                    g.setColor(Color.WHITE); // Visited cell border
+                } else {
+                    g.setColor(Color.BLACK); // Not visited cell border
+                }
+
+                // Draw the border
+                g.drawRect(c * cellSize, r * cellSize, cellSize, cellSize);
             }
         }
     }
+
+
 
 
     //Temp Fix. doesn't work with file options

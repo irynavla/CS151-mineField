@@ -57,6 +57,10 @@ public class MineFieldModel extends Model {
 		return this.grid[row][col].isVisited;
 	}
 
+	public boolean isGoal(int row, int col) {
+		return row == this.rows - 1 && col == this.cols - 1;
+	}
+
 	public int getNeighborMines(int row, int col) {
 		int total = 0;
 		for (Heading h : Heading.values()) {
