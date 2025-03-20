@@ -17,9 +17,4 @@ public class Stoplight extends Model {
         else if (color.equals(Color.RED)) color = Color.GREEN;
         changed(); // from Model, sets changed flag and fires changed event
     }
-
-    @Override
-    public void update() {
-
-    }
 }

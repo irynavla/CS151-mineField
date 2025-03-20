@@ -8,22 +8,12 @@ import mvc.View;
 public class MineFieldFactory implements AppFactory {
 
     @Override
-    public Model createModel() {
+    public Model makeModel() {
         return new MineFieldModel(10, 10); // Example grid size
     }
 
     @Override
-    public Model makeModel() {
-        return null;
-    }
-
-    @Override
     public View makeView(Model model) {
-        return null;
-    }
-
-    @Override
-    public View createView(Model model) {
         return new MineFieldView((MineFieldModel) model);
     }
 
@@ -38,9 +28,8 @@ public class MineFieldFactory implements AppFactory {
     }
 
     @Override
-    public Command makeEditCommand(String name) {
-        MineFieldModel model = (MineFieldModel) createModel();
-        switch (name) {
+    public Command makeEditCommand(Model model, String type, Object source) {
+        switch (type) {
             case "Move North": return new MineFieldCommand(model, Heading.N);
             case "Move East": return new MineFieldCommand(model, Heading.E);
             case "Move South": return new MineFieldCommand(model, Heading.S);
@@ -55,7 +44,7 @@ public class MineFieldFactory implements AppFactory {
     }
 
     @Override
-    public String getHelp() {
-        return "Move using directional commands. Avoid mines!";
+    public String[] getHelp() {
+        return new String[] {"Move using directional commands. Avoid mines!"};
     }
 }

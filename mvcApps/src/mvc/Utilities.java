@@ -1,16 +1,12 @@
 package mvc;
 
 import java.awt.event.*;
-import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.io.File;
 import java.util.Random;
+import javax.swing.*;
 
 public class Utilities {
-    public static void log(String message) {
-        System.out.println("[LOG]: " + message);
-    }
 
     // asks user a yes/no question
     public static boolean confirm(String query) {
@@ -132,9 +128,13 @@ public class Utilities {
     // random number generator
     public static Random rng = new Random(System.currentTimeMillis());
 
+    public static void log(String msg) {
+        System.out.println(msg); // for now
+    }
 
     private static int nextID = 100;
     public static int getID() {
         return nextID++;
     }
+
 }

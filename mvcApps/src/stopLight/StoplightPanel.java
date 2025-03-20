@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import mvc.*;
-import stopLight.StoplightFactory;
+import stopLight.*;
 
 
 public class StoplightPanel extends AppPanel {

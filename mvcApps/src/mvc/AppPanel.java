@@ -1,32 +1,35 @@
 package mvc;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class AppPanel extends JPanel implements Subscriber, ActionListener {
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+// AppPanel is the MVC controller
+public class AppPanel extends JPanel implements Subscriber, ActionListener  {
+
     protected Model model;
     protected AppFactory factory;
-    protected JPanel controlPanel;
     protected View view;
-
+    protected JPanel controlPanel;
     private JFrame frame;
+    public static int FRAME_WIDTH = 500;
+    public static int FRAME_HEIGHT = 300;
 
-    public static int FRAME_WIDTH = 500; //Can be adjusted
-    public static int FRAME_HEIGHT = 300;//Can be adjusted
+    public AppPanel(AppFactory factory) {
 
-    public AppPanel( AppFactory factory) {
+        // initialize fields here
         this.factory = factory;
-        model = factory.createModel();
-        view = factory.makeView(model);
+        model = this.factory.makeModel();
+        view = this.factory.makeView(model);
+        controlPanel = new ControlPanel();
+        this.setLayout(new GridLayout());
+        this.add(controlPanel);
+        this.add(view,BorderLayout.CENTER);
 
-        controlPanel = new JPanel();
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
-        setLayout(new BorderLayout());
-//        add(view, BorderLayout.CENTER);
-        frame.setJMenuBar(createMenuBar()); //  Now it's safe to call
+        frame.setJMenuBar(createMenuBar());
         frame.setTitle(factory.getTitle());
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
     }
@@ -46,6 +49,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         view.setModel(this.model);
         model.changed();
     }
+
     protected JMenuBar createMenuBar() {
         JMenuBar result = new JMenuBar();
         // add file, edit, and help menus
@@ -64,7 +68,6 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         return result;
     }
 
-    @Override
     public void actionPerformed(ActionEvent ae) {
         try {
             String cmmd = ae.getActionCommand();
@@ -89,18 +92,20 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
             } else if (cmmd.equals("Help")) {
                 Utilities.inform(factory.getHelp());
             } else { // must be from Edit menu
-                //???
+                this.factory.makeEditCommand(this.model,cmmd,this).execute();
             }
         } catch (Exception e) {
             handleException(e);
         }
     }
 
-    private void handleException(Exception e) {
+    public class ControlPanel extends JPanel {
+        public ControlPanel() {
+        }
+    }
+
+    protected void handleException(Exception e) {
         Utilities.error(e);
     }
 
-//    public static void main(String[] args){
-//        AppPanel app = new AppPanel();
-//    }
 }

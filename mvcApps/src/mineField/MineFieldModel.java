@@ -117,8 +117,8 @@ public class MineFieldModel extends Model {
 		initializeGrid();
 	}
 
-	@Override
-	public void update() {
-	    resetGame(); //temporary
-	}
+//	@Override
+//	public void update() {
+//	    resetGame(); //temporary
+//	}
 }
