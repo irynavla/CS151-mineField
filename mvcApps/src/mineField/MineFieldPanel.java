@@ -1,54 +1,57 @@
 package mineField;
 
-import mvc.AppFactory;
-import mvc.AppPanel;
-import mvc.Utilities;
-
+import mvc.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class MineFieldPanel extends AppPanel {
+    private MineFieldModel model;
+    private MineFieldView view;
+    private MineFieldFactory factory;
 
-    public MineFieldPanel(AppFactory factory) {
-        super(factory);
-        controlPanel.add(createControlPanel());
-    }
+    public MineFieldPanel(MineFieldFactory f) {
+        super(f);
+        this.factory = f;
+        this.model = (MineFieldModel) factory.makeModel();
+        this.view = (MineFieldView) factory.makeView(this.model);
+        JTextField display = new JTextField("", 10);
+        setLayout(new BorderLayout());
 
-    private JPanel createControlPanel() {
-        JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
+        add(view, BorderLayout.CENTER);
 
-        String[] directions = {"NW", "N", "NE", "W", "E", "SW", "S", "SE"};
-        for (String dir : directions) {
-            JButton button = new JButton(dir);
-            button.addActionListener(e -> handleDirection(dir));
-            panel.add(button);
+        JPanel p = new JPanel();
+        p.add(display);
+        add(p, "North");
+        JPanel keys = new JPanel(); //the keys format
+        keys.setLayout(new GridLayout(4, 2));
+
+        for (Heading h : Heading.values()) {
+            JButton b = new JButton(h.name());
+            p = new JPanel();
+            p.add(b);
+            keys.add(p);
+            b.addActionListener(this);
+        add(keys, BorderLayout.WEST);
+
         }
 
-        return panel;
+        JButton resetButton = new JButton("Reset");
+        resetButton.addActionListener(e -> {
+            model.resetGame();
+            view.repaint();
+        });
+        add(resetButton, BorderLayout.NORTH);
     }
 
-    private void handleDirection(String direction) {
-        // Example logic - modify to match your game's requirements
-        System.out.println("Direction clicked: " + direction);
-        // Call game logic based on the direction
-    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+        Heading heading = Heading.valueOf(command);
 
-    // Placeholder for the actual minefield grid
-    private class MineFieldGrid extends JPanel {
-        public MineFieldGrid() {
-            setPreferredSize(new Dimension(250, 250));
-            setBackground(Color.DARK_GRAY);
-        }
-    }
+        Command moveCommand = new MineFieldCommand(model, heading);
+        moveCommand.execute();
 
-
-
-    public static void main(String[] args) {
-        AppFactory factory = new MineFieldFactory();
-        AppPanel panel = new MineFieldPanel(factory);
-        panel.display();
-
+        view.repaint();
     }
 }
