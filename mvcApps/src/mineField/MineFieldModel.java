@@ -1,4 +1,5 @@
 package mineField;
+import java.io.Serializable;
 import java.util.*;
 import mvc.Model;
 
@@ -17,7 +18,7 @@ public class MineFieldModel extends Model {
 	}
 
 
-	private class Cell {
+	private class Cell implements Serializable {
         boolean isMined;
         boolean isVisited;
         int neighborMines;
@@ -49,8 +50,6 @@ public class MineFieldModel extends Model {
                 grid[r][c].neighborMines = getNeighborMines(r, c);
             }
         }
-		changed();
-
 	}
 
 	public boolean isVisited(int row, int col) {
@@ -103,7 +102,7 @@ public class MineFieldModel extends Model {
 		}
 
 		this.grid[this.px][this.py].isVisited = true;
-		changed();
+		change();
 	}
 
 	public int getPx() {
@@ -121,6 +120,11 @@ public class MineFieldModel extends Model {
 
 	public void resetGame() {
 		initializeGrid();
+	}
+
+	public void change(){
+		System.out.println("Change");
+		changed();
 	}
 
 }

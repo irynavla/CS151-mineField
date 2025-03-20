@@ -36,7 +36,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
 
     public void display() { frame.setVisible(true); }
 
-    public void update() {  /* override in extensions if needed */ }
+    public void update() {}
 
     public Model getModel() { return model; }
 
@@ -74,23 +74,31 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
 
             if (cmmd.equals("Save")) {
                 Utilities.save(model, false);
+
             } else if (cmmd.equals("SaveAs")) {
                 Utilities.save(model, true);
+
             } else if (cmmd.equals("Open")) {
                 Model newModel = Utilities.open(model);
                 if (newModel != null) setModel(newModel);
+
             } else if (cmmd.equals("New")) {
                 Utilities.saveChanges(model);
                 setModel(factory.makeModel());
                 // needed cuz setModel sets to true:
                 model.setUnsavedChanges(false);
+
             } else if (cmmd.equals("Quit")) {
                 Utilities.saveChanges(model);
                 System.exit(0);
+
             } else if (cmmd.equals("About")) {
+
                 Utilities.inform(factory.about());
+
             } else if (cmmd.equals("Help")) {
                 Utilities.inform(factory.getHelp());
+
             } else { // must be from Edit menu
                 this.factory.makeEditCommand(this.model,cmmd).execute();
             }

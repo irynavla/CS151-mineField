@@ -3,14 +3,10 @@ import mvc.*;
 
 public class MineFieldFactory implements AppFactory {
 
-    @Override
     public Model makeModel() {
-        MineFieldModel model = new MineFieldModel(10, 10);
-        model.initializeGrid();
-        return model;
+        return new MineFieldModel(10, 10);
     }
 
-    @Override
     public View makeView(Model model) {
         if (model instanceof MineFieldModel) {
             return new MineFieldView((MineFieldModel) model);
@@ -18,37 +14,32 @@ public class MineFieldFactory implements AppFactory {
         throw new IllegalArgumentException("Invalid model type for MineFieldView");
     }
 
-    @Override
-    public String getHelp() {
-        return "Help: Use the direction buttons to move around the minefield.";
+    public String[] getHelp() { //Using the help menu option requires a String Array (also stoplightFactory has it setup like this)
+        return new String[]{"Help: Use the direction buttons to move around the minefield."};
     }
 
-    @Override
     public String about() {
         return "MineField Game\nVersion 1.0\nDeveloped by YourName";
     }
 
-    @Override
     public String[] getEditCommands() {
-        return new String[] {"Move North", "Move East", "Move South", "Move West", "Move Northeast", "Move Northwest", "Move Southeast", "Move Southwest"};
+        return new String[] {"N", "E", "S", "W", "NE", "NW", "SE", "SW"};
     }
 
-    @Override
     public Command makeEditCommand(Model model, String type) {
         switch (type) {
-            case "Move North": return new MineFieldCommand((MineFieldModel) model, Heading.N);
-            case "Move East": return new MineFieldCommand((MineFieldModel) model, Heading.E);
-            case "Move South": return new MineFieldCommand((MineFieldModel) model, Heading.S);
-            case "Move West": return new MineFieldCommand((MineFieldModel) model, Heading.W);
-            case "Move Northeast": return new MineFieldCommand((MineFieldModel) model, Heading.NE);
-            case "Move Northwest": return new MineFieldCommand((MineFieldModel) model, Heading.NW);
-            case "Move Southeast": return new MineFieldCommand((MineFieldModel) model, Heading.SE);
-            case "Move Southwest": return new MineFieldCommand((MineFieldModel) model, Heading.SW);
+            case "N": return new MineFieldCommand(model, Heading.N);
+            case "E": return new MineFieldCommand(model, Heading.E);
+            case "W": return new MineFieldCommand(model, Heading.W);
+            case "S": return new MineFieldCommand(model, Heading.S);
+            case "NE": return new MineFieldCommand(model, Heading.NE);
+            case "NW": return new MineFieldCommand(model, Heading.NW);
+            case "SE": return new MineFieldCommand(model, Heading.SE);
+            case "SW": return new MineFieldCommand(model, Heading.SW);
             default: return null;
         }
     }
 
-    @Override
     public String getTitle() {
         return "MineField Game";
     }

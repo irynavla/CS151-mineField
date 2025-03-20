@@ -12,10 +12,13 @@ public class StoplightView extends View {
 
     public void paintComponent(Graphics gc) {
         super.paintComponent(gc);
+        System.out.println("I'm painting");
         Color oldColor = gc.getColor();
         Stoplight light = (Stoplight)model;
         StoplightShape shape = new StoplightShape(light);
         shape.draw((Graphics2D) gc);
         gc.setColor(oldColor);
     }
+
+
 }

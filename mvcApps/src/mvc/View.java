@@ -6,18 +6,20 @@ public class View extends JPanel implements Subscriber {
 
     public View(Model model) {
         this.model = model;
+        System.out.println("Subscribed");
         this.model.subscribe(this);
+        update();
     }
 
     public void setModel(Model model) {
         this.model.unsubscribe(this);
         this.model = model;
         this.model.subscribe(this);
-        repaint();
+        update();
     }
 
-    @Override
     public void update() {
+        System.out.println("Starting Repaint");
         repaint();
     }
 }
