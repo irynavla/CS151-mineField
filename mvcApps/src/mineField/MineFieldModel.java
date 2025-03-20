@@ -27,6 +27,7 @@ public class MineFieldModel extends Model {
             isVisited = false;
             neighborMines = 0;
         }
+
     }
 
 	public void initializeGrid() {
@@ -45,20 +46,23 @@ public class MineFieldModel extends Model {
 		this.grid[px][py].isVisited = true;
 		for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
-                grid[r][c].neighborMines = getNeighboringMines(r, c);
+                grid[r][c].neighborMines = getNeighborMines(r, c);
             }
         }
 		changed();
 
 	}
 
-	public int getNeighboringMines(int row, int col) {
+	public boolean isVisited(int row, int col) {
+		return this.grid[row][col].isVisited;
+	}
+
+	public int getNeighborMines(int row, int col) {
 		int total = 0;
 		for (Heading h : Heading.values()) {
 			int newRow = row + h.getDx();
 			int newCol = col + h.getDy();
 
-			// Bounds check to avoid ArrayIndexOutOfBoundsException
 			if (newRow >= 0 && newRow < grid.length && newCol >= 0 && newCol < grid[0].length) {
 				if (grid[newRow][newCol].isMined) {
 					total++;
@@ -88,10 +92,12 @@ public class MineFieldModel extends Model {
 		this.py = newY;
 
 		if (this.px == this.rows - 1 && this.py == this.cols - 1) {
+			gameOver = true;
 			changed();
 			throw new WinException();
 		}
 		if (isMine(this.px, this.py)) {
+			gameOver = true;
 			changed();
 			throw new LoseException();
 		}
@@ -117,8 +123,8 @@ public class MineFieldModel extends Model {
 		initializeGrid();
 	}
 
-//	@Override
-//	public void update() {
-//	    resetGame(); //temporary
-//	}
+	@Override
+	public void update() {
+	    resetGame();
+	}
 }
