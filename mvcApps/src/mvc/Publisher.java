@@ -17,7 +17,6 @@ public class Publisher {
         for (Subscriber s : subscribers) {
             System.out.println(s);
             s.update();
-            System.out.println("Notified");
         }
     }
 }

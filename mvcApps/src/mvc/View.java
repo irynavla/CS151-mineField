@@ -6,7 +6,6 @@ public class View extends JPanel implements Subscriber {
 
     public View(Model model) {
         this.model = model;
-        System.out.println("Subscribed");
         this.model.subscribe(this);
         update();
     }
@@ -19,7 +18,6 @@ public class View extends JPanel implements Subscriber {
     }
 
     public void update() {
-        System.out.println("Starting Repaint");
         repaint();
     }
 }

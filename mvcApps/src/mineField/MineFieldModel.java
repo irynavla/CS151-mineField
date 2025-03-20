@@ -50,6 +50,7 @@ public class MineFieldModel extends Model {
                 grid[r][c].neighborMines = getNeighborMines(r, c);
             }
         }
+		change();
 	}
 
 	public boolean isVisited(int row, int col) {
