@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MineFieldView extends View {
-    private final int cellSize = 40;
+    private final int cellSize = 25;
     private MineFieldModel field;
     private Graphics graphic;
 
