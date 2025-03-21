@@ -17,7 +17,7 @@ public class MineFieldFactory implements AppFactory {
     }
 
     public String about() {
-        return "MineField Game\nVersion 1.0\nDeveloped by YourName";
+        return "MineField Game\nVersion 1.0\nDeveloped by Iryna Vlasiuk";
     }
 
     public String[] getEditCommands() {
