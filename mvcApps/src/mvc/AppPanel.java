@@ -12,8 +12,8 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
     protected View view;
     protected JPanel controlPanel;
     private JFrame frame;
-    public static int FRAME_WIDTH = 500;
-    public static int FRAME_HEIGHT = 300;
+    public static int FRAME_WIDTH = 800;
+    public static int FRAME_HEIGHT = 600;
 
     public AppPanel(AppFactory factory) {
 
@@ -25,7 +25,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
         this.setLayout(new GridLayout());
         this.add(controlPanel);
         this.add(view,BorderLayout.CENTER);
-
+        model.subscribe(this);
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
@@ -36,7 +36,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
 
     public void display() { frame.setVisible(true); }
 
-    public void update() {}
+    public void update() {repaint();}
 
     public Model getModel() { return model; }
 
@@ -80,7 +80,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
 
             } else if (cmmd.equals("Open")) {
                 Model newModel = Utilities.open(model);
-                if (newModel != null) setModel(newModel);
+                if (newModel != null) {setModel(newModel);}
 
             } else if (cmmd.equals("New")) {
                 Utilities.saveChanges(model);
@@ -109,6 +109,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
 
     public class ControlPanel extends JPanel {
         public ControlPanel() {
+
         }
     }
 

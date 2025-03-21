@@ -4,14 +4,12 @@ import mvc.*;
 public class MineFieldFactory implements AppFactory {
 
     public Model makeModel() {
-        return new MineFieldModel(10, 10);
+        return new MineFieldModel(20, 20);
     }
 
     public View makeView(Model model) {
-        if (model instanceof MineFieldModel) {
-            return new MineFieldView((MineFieldModel) model);
-        }
-        throw new IllegalArgumentException("Invalid model type for MineFieldView");
+        System.out.println("New view made");
+        return new MineFieldView((MineFieldModel) model);
     }
 
     public String[] getHelp() { //Using the help menu option requires a String Array (also stoplightFactory has it setup like this)

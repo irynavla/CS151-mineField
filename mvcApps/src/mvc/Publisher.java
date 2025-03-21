@@ -15,7 +15,6 @@ public class Publisher {
 
     public void notifySubscribers() {
         for (Subscriber s : subscribers) {
-            System.out.println(s);
             s.update();
         }
     }
