@@ -87,8 +87,6 @@ public class MineFieldModel extends Model {
 
 		int newX = this.px + h.getDx();
 		int newY = this.py + h.getDy();
-		System.out.println(this.px + " " + this.py);
-		System.out.println(newX + " " + newY);
 		if (newX < 0 || newX >= this.rows || newY < 0 || newY >= this.cols) {
 			throw new IllegalMoveException();
 		}

@@ -7,7 +7,6 @@ import java.awt.*;
 public class MineFieldView extends View {
     private final int cellSize = 25;
     private MineFieldModel field;
-    private Graphics graphic;
 
     public MineFieldView(MineFieldModel model) {
         super(model);
@@ -19,27 +18,12 @@ public class MineFieldView extends View {
     public void setModel(Model model) {
         super.setModel(model);
         this.field = (MineFieldModel) model;
-        initView();
         repaint();
 
     }
 
-//TODO: Implement initView that intializes all the cells to unvisited text and color
-    private void initView() {
-        int rows = field.getRows();
-        int cols = field.getCols();
-        System.out.println(graphic);
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < cols; c++) {
-            }
-        }
-
-    }
-
-
     @Override
     public void paintComponent(Graphics g) {
-        this.graphic = g;
         super.paintComponent(g);
         g.setFont(new Font("Arial", Font.BOLD, 10));
         int rows = field.getRows();

@@ -21,7 +21,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
         this.factory = factory;
         model = this.factory.makeModel();
         view = this.factory.makeView(model);
-        controlPanel = new ControlPanel();
+        controlPanel = new JPanel();
         this.setLayout(new GridLayout());
         this.add(controlPanel);
         this.add(view,BorderLayout.CENTER);
@@ -107,11 +107,6 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
         }
     }
 
-    public class ControlPanel extends JPanel {
-        public ControlPanel() {
-
-        }
-    }
 
     protected void handleException(Exception e) {
         Utilities.error(e);

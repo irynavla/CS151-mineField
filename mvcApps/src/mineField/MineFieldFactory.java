@@ -8,7 +8,6 @@ public class MineFieldFactory implements AppFactory {
     }
 
     public View makeView(Model model) {
-        System.out.println("New view made");
         return new MineFieldView((MineFieldModel) model);
     }
 
