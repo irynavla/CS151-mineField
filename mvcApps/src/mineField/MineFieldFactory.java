@@ -17,7 +17,7 @@ public class MineFieldFactory implements AppFactory {
     }
 
     public String about() {
-        return "MineField Game\nVersion 1.0\nDeveloped by Iryna Vlasiuk, Emily Williams, ";
+        return "MineField Game\nVersion 1.0\nDeveloped by Iryna Vlasiuk, Emily Williams, Elijah Canonigo";
     }
 
     public String[] getEditCommands() {
