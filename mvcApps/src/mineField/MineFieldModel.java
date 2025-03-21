@@ -50,7 +50,7 @@ public class MineFieldModel extends Model {
                 grid[r][c].neighborMines = getNeighborMines(r, c);
             }
         }
-		change();
+		changed();
 	}
 
 	public boolean isVisited(int row, int col) {
@@ -108,7 +108,7 @@ public class MineFieldModel extends Model {
 		}
 
 		this.grid[this.px][this.py].isVisited = true;
-		change();
+		changed();
 	}
 
 	public int getPx() {
@@ -126,10 +126,6 @@ public class MineFieldModel extends Model {
 
 	public void resetGame() {
 		initializeGrid();
-	}
-
-	public void change(){
-		changed();
 	}
 
 }
